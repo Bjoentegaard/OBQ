@@ -161,6 +161,31 @@
     </ul>
   </div>
 
+  <div class="card">
+    <h3><span class="icon">🔬</span> Verifikasjon vs. Validering</h3>
+    <div class="grid-2">
+      <div class="inset">
+        <strong style="color:var(--accent);">Verifikasjon</strong>
+        <p style="font-size:13px;margin-top:6px;">"Bygger vi produktet riktig?" – Sjekker om arbeidsproduktet oppfyller kravene og standardene. Prosess-orientert.</p>
+      </div>
+      <div class="inset">
+        <strong style="color:var(--green);">Validering</strong>
+        <p style="font-size:13px;margin-top:6px;">"Bygger vi riktig produkt?" – Sjekker om systemet oppfyller brukernes behov og formål. Produkt-orientert.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3><span class="icon">🏆</span> QA vs. QC vs. Testing</h3>
+    <table>
+      <tr><th>Begrep</th><th>Fokus</th><th>Tilnærming</th></tr>
+      <tr><td><strong>Quality Assurance (QA)</strong></td><td>Prosesser og metoder</td><td>Forebyggende – bruk riktige prosesser</td></tr>
+      <tr><td><strong>Quality Control (QC)</strong></td><td>Produkt/arbeidsprodukt</td><td>Korrigerende – sjekk om kvalitetsmål nås</td></tr>
+      <tr><td><strong>Testing</strong></td><td>Testobjektet</td><td>En form for QC – gir info om kvalitet</td></tr>
+    </table>
+    <p style="font-size:12px;color:var(--muted);margin-top:10px;">Begge QA og QC bruker informasjon fra testing: QA forbedrer prosessen, QC fikser defekter.</p>
+  </div>
+
   <div class="grid-2">
     <div class="card">
       <h3><span class="icon">🐛</span> Feil – Defekt – Svikt</h3>
@@ -392,6 +417,39 @@
   </div>
 
   <div class="card">
+    <h3><span class="icon">🧪</span> TDD, ATDD og BDD</h3>
+    <table>
+      <tr><th>Teknikk</th><th>Hva skrives først?</th><th>Hvem skriver?</th><th>Nivå</th></tr>
+      <tr><td><strong>TDD</strong> – Test-Driven Dev.</td><td>Unit-tester</td><td>Utvikler</td><td>Komponent</td></tr>
+      <tr><td><strong>ATDD</strong> – Acceptance TDD</td><td>Akseptansetester basert på kriterier</td><td>Team (tester, dev, PO)</td><td>Akseptanse</td></tr>
+      <tr><td><strong>BDD</strong> – Behavior-Driven Dev.</td><td>Atferdsspesifikasjoner (Given/When/Then)</td><td>Team + forretning</td><td>System/akseptanse</td></tr>
+    </table>
+    <div class="tip"><strong>Eksamentips:</strong> Alle tre er "test-first"-tilnærminger – testene skrives FØR koden implementeres.</div>
+  </div>
+
+  <div class="card">
+    <h3><span class="icon">✅</span> Akseptansetesting – undertyper</h3>
+    <div class="grid-2">
+      <div class="inset">
+        <strong style="color:var(--accent);">UAT – User Acceptance Testing</strong>
+        <p style="font-size:13px;margin-top:4px;">Utføres av faktiske brukere. Verifiserer at systemet passer til daglig bruk.</p>
+      </div>
+      <div class="inset">
+        <strong style="color:var(--green);">Operasjonell akseptansetest</strong>
+        <p style="font-size:13px;margin-top:4px;">Utføres av driftsavdelingen. Sikkerhetskopier, katastrofegjenoppretting, vedlikehold.</p>
+      </div>
+      <div class="inset">
+        <strong style="color:var(--amber);">Kontraktuell/regulatorisk testing</strong>
+        <p style="font-size:13px;margin-top:4px;">Verifiserer at systemet oppfyller kontraktskrav eller lovpålagte krav.</p>
+      </div>
+      <div class="inset">
+        <strong style="color:var(--purple);">Alpha/Beta-testing</strong>
+        <p style="font-size:13px;margin-top:4px;"><strong>Alpha:</strong> Hos utviklerorganisasjonen, med faktiske brukere. <strong>Beta:</strong> Hos brukernes egne lokasjoner, uten utvikler til stede.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
     <h3><span class="icon">🔧</span> Vedlikeholdstesting</h3>
     <p style="font-size:14px;">Utløses av endringer i et system som allerede er i produksjon. Typer: <strong>korrektiv</strong> (bugfiks), <strong>adaptiv</strong> (ny plattform/krav), <strong>perfektiv</strong> (ytelse/vedlikeholdsevne). Inkluderer alltid regresjonstesting for å sikre at eksisterende funksjonalitet ikke er påvirket.</p>
   </div>
@@ -547,7 +605,25 @@
       <div class="details-body">
         <p>Del inndata i grupper (partisjoner) der systemet forventes å oppføre seg likt. Test én verdi fra hver partisjon – en test er representativ for alle i gruppen.</p>
         <br>
-        <p><strong>Eksempel:</strong> Alder 1–17 = barn, 18–64 = voksen, 65+ = senior. Test én fra hver gruppe.</p>
+        <div class="grid-2">
+          <div>
+            <strong>Gyldige partisjoner</strong>
+            <p style="font-size:12px;margin-top:4px;">Verdier systemet aksepterer/behandler (definert i spec)</p>
+          </div>
+          <div>
+            <strong>Ugyldige partisjoner</strong>
+            <p style="font-size:12px;margin-top:4px;">Verdier systemet avviser/ignorerer. Test dem INDIVIDUELT – én ugyldig om gangen, ellers maskerer feil hverandre!</p>
+          </div>
+        </div>
+        <br>
+        <p><strong>Eksempel (medisinlagring +5 til +25°C):</strong></p>
+        <table style="font-size:12px;">
+          <tr><th>Klasse</th><th>Under +5°C</th><th>+5 – +25°C</th><th>Over +25°C</th></tr>
+          <tr><td>Gyldighet</td><td>Ugyldig</td><td>Gyldig</td><td>Ugyldig</td></tr>
+          <tr><td>Testverdi</td><td>-2°C</td><td>+10°C</td><td>+38°C</td></tr>
+        </table>
+        <br>
+        <p><strong>Each Choice Coverage:</strong> Krev at hver partisjon testes minst én gang. Minimumsantall testtilfeller = antall verdier i den største partisjongruppen. Én testcase kan dekke én partisjon fra hver gruppe.</p>
         <div class="tags" style="margin-top:8px;"><span class="tag purple">K2</span></div>
       </div>
     </details>
@@ -555,10 +631,22 @@
     <details>
       <summary>📏 Grenseverdianalyse (BVA)</summary>
       <div class="details-body">
-        <p>Test på grensene mellom partisjoner. Defekter oppstår ofte akkurat ved grensene.</p>
+        <p>Test på grensene mellom partisjoner. Defekter oppstår ofte akkurat ved grensene. Krever ordnede partisjoner (gjør EP først).</p>
         <br>
-        <p><strong>2-verdi BVA:</strong> Test min og max av gyldig partisjon (+ én utenfor).</p>
-        <p><strong>3-verdi BVA:</strong> Test verdien rett under, på og rett over grensen.</p>
+        <table style="font-size:12px;">
+          <tr><th>Teknikk</th><th>Per grense</th><th>Eksempel (grense ved 10)</th></tr>
+          <tr><td><strong>2-verdi</strong></td><td>Grenseverdien + én verdi på den andre siden</td><td>10, 11</td></tr>
+          <tr><td><strong>3-verdi</strong></td><td>Verdien under, på og over grensen</td><td>9, 10, 11</td></tr>
+        </table>
+        <br>
+        <p><strong>Hvorfor 3-verdi finner mer:</strong> Hvis spec sier <code>x ≤ 50</code> men kode har bug <code>x = 50</code>, finner 2-verdi (50, 51) IKKE feilen – men 3-verdi (49, 50, 51) finner den fordi 49 feiler.</p>
+        <br>
+        <p><strong>Eksempel (medisin +5 til +25°C, heltall):</strong></p>
+        <table style="font-size:12px;">
+          <tr><th>Teknikk</th><th>Nedre grense</th><th>Øvre grense</th></tr>
+          <tr><td>2-verdi</td><td>4, 5</td><td>25, 26</td></tr>
+          <tr><td>3-verdi</td><td>4, 5, 6</td><td>24, 25, 26</td></tr>
+        </table>
         <div class="tags" style="margin-top:8px;"><span class="tag purple">K3</span></div>
       </div>
     </details>
@@ -566,15 +654,22 @@
     <details>
       <summary>📊 Beslutningstabell-testing</summary>
       <div class="details-body">
-        <p>Brukes når systemets oppførsel avhenger av kombinasjoner av betingelser. Tabellen viser alle kombinasjoner av betingelser og tilhørende handlinger.</p>
+        <p>Brukes når systemets oppførsel avhenger av <strong>kombinasjoner av betingelser</strong> (forretningsregler). Tabellen viser alle kombinasjoner og tilhørende handlinger.</p>
         <br>
-        <table>
-          <tr><th>Betingelse 1</th><th>Betingelse 2</th><th>Handling</th></tr>
-          <tr><td>Sann</td><td>Sann</td><td>Handling A</td></tr>
-          <tr><td>Sann</td><td>Usann</td><td>Handling B</td></tr>
-          <tr><td>Usann</td><td>Sann</td><td>Handling C</td></tr>
-          <tr><td>Usann</td><td>Usann</td><td>Ingen handling</td></tr>
-        </table>
+        <div class="grid-2">
+          <div>
+            <strong>Limited entry tabell</strong>
+            <p style="font-size:12px;margin-top:4px;">Boolsk format – ja/nei, sant/usant. 3 betingelser = 2×2×2 = <strong>8 kombinasjoner</strong>.</p>
+          </div>
+          <div>
+            <strong>Extended entry tabell</strong>
+            <p style="font-size:12px;margin-top:4px;">Betingelser med flere verdier. 3 betingelser med 3, 2, 2 verdier = <strong>12 kombinasjoner</strong>.</p>
+          </div>
+        </div>
+        <br>
+        <p><strong>Antall kombinasjoner:</strong> Multipliser antall mulige verdier per betingelse. F.eks. 3 betingelser med 2 verdier hver = 2 × 2 × 2 = 8.</p>
+        <p style="margin-top:8px;"><strong>Notasjon (ISTQB):</strong> Irrelevant betingelse = <code>-</code>, handling skal skje = <code>X</code>, handling skal ikke skje = tomt.</p>
+        <p style="margin-top:8px;color:var(--amber);"><strong>Begrensning:</strong> Antall kombinasjoner vokser eksponentielt – bruk risikobasert tilnærming for å begrense.</p>
         <div class="tags" style="margin-top:8px;"><span class="tag purple">K3</span></div>
       </div>
     </details>
@@ -582,10 +677,17 @@
     <details>
       <summary>🔀 Tilstandsovergangstesting</summary>
       <div class="details-body">
-        <p>Modellerer systemet som en tilstandsmaskin. Tester alle tilstander, overganger, triggere og handlinger.</p>
+        <p>Modellerer systemet som en tilstandsmaskin. Tester alle tilstander, overganger, triggere og handlinger. Transitonslabel: <code>Hendelse [Betingelse] / Handling</code>.</p>
         <br>
-        <p><strong>Elementer:</strong> Tilstander → Overganger → Triggere → Handlinger</p>
-        <p style="margin-top:8px;"><strong>Dekningstyper:</strong> Alle tilstander, alle overganger, alle gyldige/ugyldige overganger.</p>
+        <p><strong>State Table:</strong> Rader = tilstander, kolonner = hendelser, celler = målstate. Ugyldige overganger vises som <code>-</code> (bindestreker) – dette gjør ugyldige overganger <em>synlige</em>, noe state-diagrammet ikke gjør!</p>
+        <br>
+        <table style="font-size:12px;">
+          <tr><th>Dekningsnivå</th><th>Hva kreves</th><th>Styrke</th></tr>
+          <tr><td><strong>All states</strong></td><td>Besøk alle tilstander minst én gang</td><td>Svakest</td></tr>
+          <tr><td><strong>Valid transitions (0-switch)</strong></td><td>Kjør alle gyldige overganger minst én gang. Mest brukt.</td><td>Medium</td></tr>
+          <tr><td><strong>All transitions</strong></td><td>Kjør alle gyldige OG forsøk alle ugyldige overganger</td><td>Sterkest – kreves for sikkerhetskritisk</td></tr>
+        </table>
+        <p style="font-size:12px;color:var(--muted);margin-top:8px;">100% valid transitions coverage ⊃ 100% all states coverage. 100% all transitions coverage ⊃ 100% valid transitions.</p>
         <div class="tags" style="margin-top:8px;"><span class="tag purple">K3</span></div>
       </div>
     </details>
@@ -632,21 +734,56 @@
   </div>
 
   <div class="card">
-    <h3><span class="icon">🤝</span> Samarbeidsbaserte testteknikker</h3>
+    <h3><span class="icon">🤝</span> De 3 C-ene – User Stories</h3>
     <div class="grid-3">
-      <div style="background:#faf5ff;border-radius:10px;padding:14px;border:1px solid #e9d5ff;">
-        <strong style="font-size:13px;color:#6b21a8;">Collaborative User Story Writing</strong>
-        <p style="font-size:12px;margin-top:6px;">3 Cs: Card, Conversation, Confirmation. Alle bidrar til å skrive brukerstories.</p>
+      <div class="inset">
+        <strong style="color:var(--purple);">📇 Card</strong>
+        <p style="font-size:12px;margin-top:6px;">Skriftlig beskrivelse av krav, prioritet, estimater og akseptansekriterier. Fysisk kort eller elektronisk oppgave.</p>
       </div>
-      <div style="background:#faf5ff;border-radius:10px;padding:14px;border:1px solid #e9d5ff;">
-        <strong style="font-size:13px;color:#6b21a8;">Akseptansekriterier</strong>
-        <p style="font-size:12px;margin-top:6px;">Definerer hva som må oppfylles for at en story er ferdig. Given/When/Then-format (Gherkin).</p>
+      <div class="inset">
+        <strong style="color:var(--purple);">💬 Conversation</strong>
+        <p style="font-size:12px;margin-top:6px;">Detaljene bak storyen kommer frem i samtale med produkteier. Testere bidrar med unikt perspektiv.</p>
       </div>
-      <div style="background:#faf5ff;border-radius:10px;padding:14px;border:1px solid #e9d5ff;">
-        <strong style="font-size:13px;color:#6b21a8;">ATDD</strong>
-        <p style="font-size:12px;margin-top:6px;">Acceptance Test-Driven Development. Testene skrives FØR koden basert på akseptansekriterier.</p>
+      <div class="inset">
+        <strong style="color:var(--purple);">✅ Confirmation</strong>
+        <p style="font-size:12px;margin-top:6px;">Akseptansekriterier og testtilfeller – bekrefter at storyen er "done". Inkluder negative tester!</p>
       </div>
     </div>
+  </div>
+
+  <div class="card">
+    <h3><span class="icon">💡</span> INVEST-kriterier for gode user stories</h3>
+    <table>
+      <tr><th>Bokstav</th><th>Kriterium</th><th>Forklaring</th></tr>
+      <tr><td><strong style="color:var(--accent);">I</strong></td><td>Independent</td><td>Kan utvikles uavhengig av andre stories</td></tr>
+      <tr><td><strong style="color:var(--accent);">N</strong></td><td>Negotiable</td><td>Detaljer avklares underveis, ikke låst</td></tr>
+      <tr><td><strong style="color:var(--accent);">V</strong></td><td>Valuable</td><td>Gir verdi for kunden / forretningen</td></tr>
+      <tr><td><strong style="color:var(--accent);">E</strong></td><td>Estimateable</td><td>Teamet forstår storyen godt nok til å estimere</td></tr>
+      <tr><td><strong style="color:var(--accent);">S</strong></td><td>Small</td><td>Passer inn i én iterasjon, liten nok til å estimere presist</td></tr>
+      <tr><td><strong style="color:var(--accent);">T</strong></td><td>Testable</td><td>Kan skrives tester for – hvis ikke, er storyen uklar</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3><span class="icon">🔁</span> ATDD – 4 steg</h3>
+    <div class="flow" style="flex-direction:column;gap:8px;">
+      <div class="flow-step" style="background:var(--bg3);border:1px solid var(--border);color:var(--text);width:100%;text-align:left;padding:12px 16px;">
+        <strong>1. Analyser, diskuter og fiks</strong> – Specification Workshop. Utviklere, testere og forretning analyserer user story. Uklarheter og feil rettes HER.
+      </div>
+      <div class="flow-arrow" style="text-align:center;">↓</div>
+      <div class="flow-step" style="background:var(--bg3);border:1px solid var(--border);color:var(--text);width:100%;text-align:left;padding:12px 16px;">
+        <strong>2. Lag eksempler og testdata</strong> – Positive tester først, deretter negative, så ikke-funksjonelle. Valideres av forretningsrepresentant.
+      </div>
+      <div class="flow-arrow" style="text-align:center;">↓</div>
+      <div class="flow-step" style="background:var(--bg3);border:1px solid var(--border);color:var(--text);width:100%;text-align:left;padding:12px 16px;">
+        <strong>3. Automatiser testtilfeller</strong> – Tester i tabellformat, legges inn i automatiseringsverktøy. Integreres i CI/CD.
+      </div>
+      <div class="flow-arrow" style="text-align:center;">↓</div>
+      <div class="flow-step" style="background:var(--bg3);border:1px solid var(--border);color:var(--text);width:100%;text-align:left;padding:12px 16px;">
+        <strong>4. Koble tester og implementer</strong> – Tester feiler initialt (som TDD). Implementer kode til alle ATDD-tester består.
+      </div>
+    </div>
+    <div class="tip"><strong>Eksamentips:</strong> Akseptansetester i ATDD er et <em>krav/benchmark</em> for utvikling – ikke fullstendig testdekning. Supplement med eksplorativ testing.</div>
   </div>
 </div>
 
@@ -677,24 +814,26 @@
       <div>
         <strong style="font-size:13px;">Estimeringsteknikker</strong>
         <ul class="plain" style="margin-top:8px;">
-          <li>Metrikk-basert (historiske data)</li>
-          <li>Ekspertbasert (faglig skjønn)</li>
-          <li>Planning Poker</li>
-          <li>Analogibasert</li>
+          <li><strong>Ratio-basert:</strong> Bruk ratio fra tidligere prosjekter (dev:test = 3:2)</li>
+          <li><strong>Ekstrapolering:</strong> Estimer resten basert på fullført arbeid (passer iterativ)</li>
+          <li><strong>Planning Poker:</strong> Agil Wideband Delphi med relativt kortdeck</li>
+          <li><strong>Trekantsestimering:</strong> <code>E = (a + 4×m + b) / 6</code><br>
+          <span style="font-size:11px;color:var(--muted);">Optimistisk=5, sannsynlig=10, pessimistisk=20 → E=10.8 ± SD=2.5</span></li>
         </ul>
       </div>
     </div>
     <div class="divider"></div>
     <div class="grid-2">
-      <div style="background:#dcfce7;border-radius:8px;padding:12px;">
-        <strong style="font-size:13px;color:#166534;">Entry-kriterier (Definition of Ready)</strong>
-        <p style="font-size:12px;margin-top:4px;">Hva må være på plass FØR testing starter? F.eks: krav godkjent, testmiljø tilgjengelig.</p>
+      <div class="info-block green">
+        <strong>Entry-kriterier (Definition of Ready)</strong>
+        <p style="font-size:12px;margin-top:4px;">Hva må være på plass FØR testing starter? Ressurser, testmiljø, testbasis, smoke test bestått.</p>
       </div>
-      <div style="background:#fee2e2;border-radius:8px;padding:12px;">
-        <strong style="font-size:13px;color:#991b1b;">Exit-kriterier (Definition of Done)</strong>
-        <p style="font-size:12px;margin-top:4px;">Når er testing ferdig? F.eks: alle testtilfeller kjørt, akseptabel defekttetthet.</p>
+      <div class="info-block red">
+        <strong>Exit-kriterier (Definition of Done)</strong>
+        <p style="font-size:12px;margin-top:4px;">Når er testing ferdig? Planlagte tester kjørt, kodedekning nådd, akseptabel defekttetthet.</p>
       </div>
     </div>
+    <div class="tip"><strong>OBS:</strong> Hvis exit-kriterier ikke er oppfylt og testing stoppes, MÅ alle interessenter kjenne risikoen og akseptere den.</div>
   </div>
 
   <div class="card">
@@ -709,12 +848,19 @@
         <p style="font-size:12px;color:var(--muted);text-align:center;margin-top:8px;">Bunn = mange + billige, Topp = færre + dyre</p>
       </div>
       <div>
-        <strong style="font-size:13px;">Testkvadrantene (Brian Marick)</strong>
-        <table style="margin-top:8px;font-size:12px;">
-          <tr><th>Q1</th><td>Unit/komponent, automatisert (teknologi-fokus)</td></tr>
-          <tr><th>Q2</th><td>Funksjonell, stories, akseptanse</td></tr>
-          <tr><th>Q3</th><td>Utforskende, brukervennlighet, akseptanse</td></tr>
-          <tr><th>Q4</th><td>Ytelse, sikkerhet, belastning</td></tr>
+        <strong style="font-size:13px;">Testkvadrantene (Marick 2003)</strong>
+        <table style="margin-top:8px;font-size:11px;">
+          <tr><th></th><th>Støtter teamet</th><th>Kritiserer produktet</th></tr>
+          <tr>
+            <td><strong>Forretning</strong></td>
+            <td><strong>Q2</strong> – Funksjonelle tester, user stories, akseptanse. Manuell + auto.</td>
+            <td><strong>Q3</strong> – Eksplorativ, UAT, brukervennlighet. Manuell.</td>
+          </tr>
+          <tr>
+            <td><strong>Teknologi</strong></td>
+            <td><strong>Q1</strong> – Unit-tester, komponenttester. Automatisert, i CI.</td>
+            <td><strong>Q4</strong> – Ytelse, sikkerhet, belastning. Automatisert. (Unntatt brukervennlighet = Q3)</td>
+          </tr>
         </table>
       </div>
     </div>
@@ -734,17 +880,20 @@
       </div>
       <div>
         <strong style="font-size:13px;">Risikotyper</strong>
-        <ul class="plain" style="margin-top:8px;">
-          <li><strong>Produktrisiko:</strong> Feil i systemet som kan skade brukere</li>
-          <li><strong>Prosjektrisiko:</strong> Faktorer som påvirker prosjektleveransen</li>
-        </ul>
+        <table style="margin-top:8px;font-size:12px;">
+          <tr><th></th><th>Prosjektrisiko</th><th>Produktrisiko</th></tr>
+          <tr><td>Angår</td><td>Prosjektets leveranse (tid, kost, scope)</td><td>Systemets kvalitet og egenskaper</td></tr>
+          <tr><td>Eksempler</td><td>Forsinkelser, budsjettsprekk, mangel på kompetanse</td><td>Feil beregninger, ytelsesproblem, sikkerhetshull</td></tr>
+          <tr><td>Testing påvirker?</td><td style="color:var(--red);font-weight:700;">NEI</td><td style="color:var(--green);font-weight:700;">JA</td></tr>
+        </table>
+        <div class="tip"><strong>Eksamentips:</strong> Prosjektrisiko kan IKKE påvirkes av testing. Produktrisiko KAN påvirkes av testing.</div>
         <div class="divider"></div>
-        <strong style="font-size:13px;">Risikokontroll</strong>
+        <strong style="font-size:13px;">Risikokontroll (produktrisiko)</strong>
         <ul class="plain" style="margin-top:8px;">
-          <li>Risikomitigering via mer testing</li>
-          <li>Risikoaksept (bevisst)</li>
-          <li>Risikooverføring</li>
-          <li>Risikounngåelse</li>
+          <li>Testing (primær tiltak)</li>
+          <li>Risikoaksept (bevisst, lav risiko)</li>
+          <li>Risikooverføring til tredjepart</li>
+          <li>Beredskapsplan (forbered seg på konsekvenser)</li>
         </ul>
       </div>
     </div>
@@ -795,8 +944,67 @@
   </div>
 
   <div class="card">
-    <h3><span class="icon">⚙️</span> Konfigurasjonsstyring</h3>
-    <p style="font-size:14px;">Sikrer at testware og testobjekter er korrekt identifisert, versjonert og sporbare. Muliggjør reproduksjon av tester. Testplaner, testtilfeller og testdata bør versjonskontrolleres.</p>
+    <h3><span class="icon">📄</span> Fremdriftsrapport vs. Sluttrapport</h3>
+    <table style="font-size:12px;">
+      <tr><th>Fremdriftsrapport (løpende)</th><th>Sluttrapport (per fase)</th></tr>
+      <tr><td>Testperiode</td><td>Testsammendrag</td></tr>
+      <tr><td>Fremdrift vs. plan</td><td>Evaluering av testing og produktkvalitet</td></tr>
+      <tr><td>Hindringer og tiltak</td><td>Avvik fra testplanen</td></tr>
+      <tr><td>Testmetrikker</td><td>Testmetrikker fra fremdriftsrapporter</td></tr>
+      <tr><td>Nye og endrede risikoer</td><td>Umitigerte risikoer, åpne defekter</td></tr>
+      <tr><td>Planlagt for neste periode</td><td>Lærdom (lessons learned)</td></tr>
+    </table>
+    <p style="font-size:12px;color:var(--muted);margin-top:8px;">Tilpass alltid rapporten til målgruppen – ledelse vil ha sammendrag, teknisk team vil ha detaljer.</p>
+  </div>
+
+  <div class="card">
+    <h3><span class="icon">⚙️</span> Konfigurasjonsstyring (CM)</h3>
+    <div class="grid-2">
+      <div>
+        <strong style="font-size:13px;">Hva CM sikrer</strong>
+        <ul class="plain" style="margin-top:8px;">
+          <li>Alle konfigurasjonselementer er unikt identifisert og versjonskontrollert</li>
+          <li>Sporbarhetslenker mellom testware og testobjekter</li>
+          <li>Rollback til tidligere versjoner er mulig</li>
+        </ul>
+      </div>
+      <div>
+        <strong style="font-size:13px;">Problemer uten CM</strong>
+        <ul class="plain" style="margin-top:8px;">
+          <li>Vanskeleg å reprodusere svikt</li>
+          <li>Feil programvareversjon brukes under testing</li>
+          <li>Fikser kan gå tapt mellom versjoner</li>
+          <li>Fiksede defekter kan dukke opp igjen</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3><span class="icon">🐞</span> Defektrapport – obligatoriske felter</h3>
+    <div class="grid-2">
+      <ul class="plain">
+        <li>Unik identifikator (ID)</li>
+        <li>Tittel og kort sammendrag</li>
+        <li>Dato og rapportørnavn</li>
+        <li>Testobjekt og testmiljø</li>
+        <li>Kontekst (SDLC-fase, testdata, testtilfelle)</li>
+        <li>Beskrivelse med logger/skjermbilder</li>
+      </ul>
+      <ul class="plain">
+        <li>Forventet vs. faktisk resultat</li>
+        <li>Reproduksjonssteg (kritisk – fikseren må kunne gjenta!)</li>
+        <li>Alvorlighetsgrad (konsekvens)</li>
+        <li>Prioritet (hastighet for fiks)</li>
+        <li>Status (åpen, under utbedring, lukket, avvist...)</li>
+        <li>Referanser til vedlegg</li>
+      </ul>
+    </div>
+    <div class="divider"></div>
+    <div class="grid-2">
+      <div class="info-block red"><strong>False Positive</strong><p style="font-size:12px;margin-top:4px;">En test som burde ha bestått, feiler. Ingen reell defekt.</p></div>
+      <div class="info-block amber"><strong>False Negative</strong><p style="font-size:12px;margin-top:4px;">En test som burde ha funnet en defekt, består. Defekten er skjult.</p></div>
+    </div>
   </div>
 </div>
 
@@ -811,17 +1019,20 @@
   </div>
 
   <div class="card">
-    <h3><span class="icon">🛠️</span> Kategorier av testverktøy</h3>
+    <h3><span class="icon">🛠️</span> Kategorier av testverktøy (ISTQB)</h3>
     <table>
       <tr><th>Kategori</th><th>Eksempler</th><th>Formål</th></tr>
-      <tr><td>Testadministrasjon</td><td>Jira, TestRail, Xray</td><td>Planlegging, sporing, rapportering</td></tr>
-      <tr><td>Statisk analyse</td><td>SonarQube, ESLint</td><td>Kodegjennomgang uten kjøring</td></tr>
-      <tr><td>Testdesign</td><td>Mind-maps, BDD-verktøy</td><td>Generere testtilfeller</td></tr>
-      <tr><td>CI/CD og bygging</td><td>Jenkins, GitHub Actions</td><td>Automatisk bygging og testkjøring</td></tr>
-      <tr><td>Funksjonell automatisering</td><td>Selenium, Playwright, Cypress</td><td>Automatisk UI-testing</td></tr>
-      <tr><td>Ytelsestesting</td><td>JMeter, k6, Gatling</td><td>Belastning og ytelse</td></tr>
-      <tr><td>Defekthåndtering</td><td>Jira, Azure DevOps</td><td>Rapportere og spore defekter</td></tr>
+      <tr><td><strong>Testadministrasjon</strong></td><td>Jira, TestRail, Xray</td><td>Planlegging, sporing, rapportering, konfigurasjonsstyring</td></tr>
+      <tr><td><strong>Statisk testing</strong></td><td>SonarQube, ESLint</td><td>Reviews og statisk analyse</td></tr>
+      <tr><td><strong>Testdesign og -implementering</strong></td><td>Mind-maps, BDD-verktøy</td><td>Generere testtilfeller, testdata og prosedyrer</td></tr>
+      <tr><td><strong>Testutføring og dekning</strong></td><td>Selenium, Playwright, Cypress</td><td>Automatisk testkjøring og dekningsmåling</td></tr>
+      <tr><td><strong>Ikke-funksjonell testing</strong></td><td>JMeter, k6, Gatling, OWASP ZAP</td><td>Ytelse, sikkerhet, belastning – vanskelig manuelt</td></tr>
+      <tr><td><strong>DevOps-verktøy</strong></td><td>Jenkins, GitHub Actions, GitLab CI</td><td>CI/CD-pipeline, automatisk bygging og testkjøring</td></tr>
+      <tr><td><strong>Samarbeidsverktøy</strong></td><td>Confluence, Teams, Slack</td><td>Kommunikasjon mellom teammedlemmer</td></tr>
+      <tr><td><strong>Skalerbarhet og deployment</strong></td><td>Docker, Kubernetes</td><td>Virtuelle maskiner, containerisering</td></tr>
+      <tr><td><strong>Alle andre hjelpeverktøy</strong></td><td>Excel, debuggere, SQL-editorer</td><td>Ethvert verktøy som støtter testing</td></tr>
     </table>
+    <p style="font-size:12px;color:var(--muted);margin-top:8px;">Definisjonen er bred: selv et regneark er et testverktøy i testkontekst.</p>
   </div>
 
   <div class="card">
@@ -838,21 +1049,20 @@
         </ul>
       </div>
       <div>
-        <strong style="font-size:13px;color:#c0392b;">⚠️ Risikoer</strong>
+        <strong style="font-size:13px;color:var(--red);">⚠️ Risikoer</strong>
         <ul class="plain" style="margin-top:8px;">
-          <li>Høye oppsettskostnader</li>
-          <li>Krever spesialistkompetanse</li>
-          <li>Vedlikehold av testskript</li>
-          <li>Falsk trygghet ("vi har automatisert")</li>
-          <li>Automatiserte tester finner ikke alt</li>
+          <li>Urealistiske forventninger til verktøy</li>
+          <li>Undervurdere tid, penger og innsats (opplæring, vedlikehold, oppgraderinger)</li>
+          <li>Bruker verktøy der manuell testing er mer effektivt</li>
+          <li>For stor tillit til verktøyet – erstatter ikke testdesign</li>
+          <li>Verktøyleverandør går konkurs eller avvikler produktet</li>
+          <li>Open source-prosjekt avvikles</li>
+          <li>Plattform/teknologi ikke støttet</li>
+          <li>Verktøy ikke i tråd med regulatoriske krav</li>
         </ul>
       </div>
     </div>
-    <div class="divider"></div>
-    <div style="background:#fffbf0;border-radius:8px;padding:14px;border:1px solid #fde68a;">
-      <strong style="font-size:13px;">💡 Viktig å huske</strong>
-      <p style="font-size:13px;margin-top:6px;">Testautomatisering er IKKE et mål i seg selv. Det er et hjelpemiddel. Manuelle tester er fortsatt nødvendige, spesielt for brukervennlighet og eksplorativ testing.</p>
-    </div>
+    <div class="tip"><strong>Viktig:</strong> Testautomatisering er IKKE et mål i seg selv – det er et hjelpemiddel. Verktøy tenker ikke – de oppdager ikke problemer med testgrunnlaget. Uventede situasjoner stopper mange automatiseringsverktøy.</div>
   </div>
 </div>
 
